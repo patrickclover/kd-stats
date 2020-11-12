@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from 'preact/hooks'
+import { useCallback, useEffect } from 'preact/hooks'
 import { KD } from '../@types/kd.type'
 import { get } from '../util/fetchHelper'
+import useLocalStorage from './useLocalStorage'
 
 const baseUrl = 'https://api.tracker.gg/api/v2/warzone/standard/profile'
 const kdHook = (username: string, type = 'xbl') => {
-  const [user, setUser] = useState<KD | null>(null)
+  const [user, setUser] = useLocalStorage<KD | null>(username, null)
 
   const getUser = useCallback(async () => {
     try {

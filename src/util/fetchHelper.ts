@@ -11,7 +11,7 @@ export async function http<T>(
   const request = new Request(info, init)
   request.headers.set('Content-Type', 'application/json')
 
-  const response = await fetch(request)
+  const response = await fetch(request, { mode: 'no-cors' })
   if (isErrorCode(response.status)) {
     throw response
   }
