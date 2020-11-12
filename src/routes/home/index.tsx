@@ -15,7 +15,7 @@ import kdHook from '../../hooks/kdHook'
 import * as style from './style.css'
 
 const Home: FunctionalComponent = () => {
-  const [sort, setSort] = useState('kdRatio')
+  const [sort, setSort] = useState<string>('kdRatio')
   const patrick = kdHook('playbyclover')
   const joe = kdHook('josefbenassi%237491959', 'atvi')
   const lewis = kdHook('lewisjblyth1')
@@ -55,7 +55,12 @@ const Home: FunctionalComponent = () => {
         <HStack spacing={3} minW="1000px">
           {kds
             .filter(v => !!v)
-            .sort((a, b) => findStats(b)[sort].value - findStats(a)[sort].value)
+            .sort((a, b) => {
+              const statA = findStats(a)
+              const statB = findStats(b)
+              if (!statA || !statB) return 0
+              return statB[sort].value - statA[sort].value
+            })
             .map((kd, key) => (
               <User key={key} kd={kd} sort={sort} />
             ))}
