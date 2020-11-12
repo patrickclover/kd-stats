@@ -29,13 +29,13 @@ const Home: FunctionalComponent = () => {
 
   return (
     <div class={style.home}>
-      <Stack spacing={3}>
-        <Stack mb={3} spacing={3}>
-          <Flex justify="space-between" align="center">
-            <Heading as="h1" size="2xl" pt={10} fontWeight="300">
+      <Stack spacing={3} pl={3}>
+        <Stack mb={3} spacing={3} pl={3}>
+          <Flex justify="space-between" align="flex-end">
+            <Heading as="h1" size="xl" pt={10} fontWeight="300">
               Scoreboard
             </Heading>
-            <Box>
+            <Box pr={3}>
               <Select
                 placeholder="Sort by"
                 onChange={({ target }) => setSort(target.value)}

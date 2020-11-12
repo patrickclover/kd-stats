@@ -33,40 +33,37 @@ const User = ({ kd, sort }: PassedProps) => {
     [kd]
   )
   return (
-    <Flex flex="1">
-      <Avatar src={kd?.platformInfo.avatarUrl}>
-        <AvatarBadge boxSize="1.25em" bg="green.500" />
-      </Avatar>
-      <Box ml="3" w="100%" pb={5}>
-        <Stack spacing={3}>
+    <Flex flex="1" direction="column" ml={3} mr={3}>
+      <Box d="flex">
+        <Avatar src={kd?.platformInfo.avatarUrl}>
+          <AvatarBadge boxSize="1.25em" bg="green.500" />
+        </Avatar>
+        <Box ml="3" w="100%" pb={5}>
           <Box>
             <Text fontWeight="bold" fontSize="sm">
               {kd?.platformInfo.platformUserIdentifier}
             </Text>
             <Text fontSize="sm">Last update: {getUpdate}</Text>
           </Box>
-          <Divider />
-
-          {Object.entries(overview?.stats ?? {}).map(([key, stat]) => (
-            <Stat
-              pl={3}
-              pr={3}
-              key={key}
-              bg={key === sort ? 'black' : undefined}
-              borderRadius={5}
-            >
-              <StatLabel>{stat.displayName}</StatLabel>
-              <StatNumber>{stat.displayValue}</StatNumber>
-
-              <StatHelpText>
-                Percentile {stat.percentile || 'N/A'}%
-              </StatHelpText>
-
-              <Divider />
-            </Stat>
-          ))}
-        </Stack>
+        </Box>
       </Box>
+
+      {Object.entries(overview?.stats ?? {}).map(([key, stat]) => (
+        <Stat
+          pr={3}
+          pt={2}
+          key={key}
+          bg={key === sort ? 'green.400' : undefined}
+          borderRadius={5}
+        >
+          <StatLabel>{stat.displayName}</StatLabel>
+          <StatNumber>{stat.displayValue}</StatNumber>
+
+          <StatHelpText>Percentile {stat.percentile || 'N/A'}%</StatHelpText>
+
+          {key !== sort && <Divider />}
+        </Stat>
+      ))}
     </Flex>
   )
 }
