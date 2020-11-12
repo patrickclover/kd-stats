@@ -1,4 +1,4 @@
-import { Heading, HStack, Stack } from '@chakra-ui/core'
+import { Box, Divider, Heading, HStack, Stack } from '@chakra-ui/core'
 import { FunctionalComponent, h } from 'preact'
 import User from '../../components/user/user'
 import kdHook from '../../hooks/kdHook'
@@ -12,8 +12,14 @@ const Home: FunctionalComponent = () => {
   return (
     <div class={style.home}>
       <Stack spacing={3}>
-        <Heading>KD Scoreboard</Heading>
-        <HStack spacing={3}>
+        <Stack mb={3} spacing={3}>
+          <Heading as="h1" size="3xl" pt={10} fontWeight="300">
+            Scoreboard
+          </Heading>
+          <Divider />
+        </Stack>
+
+        <HStack spacing={3} minW="922px">
           <User kd={patrick} />
           <User kd={joe} />
           <User kd={lewis} />

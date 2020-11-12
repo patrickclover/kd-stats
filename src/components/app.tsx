@@ -5,6 +5,7 @@ import { ChakraProvider } from '@chakra-ui/core'
 import Home from '../routes/home'
 import Profile from '../routes/profile'
 import NotFoundPage from '../routes/notfound'
+import theme from '../theme'
 
 const App: FunctionalComponent = () => {
   let currentUrl: string
@@ -13,7 +14,7 @@ const App: FunctionalComponent = () => {
   }
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <div id="app">
         <Router onChange={handleRoute}>
           <Route path="/" component={Home} />

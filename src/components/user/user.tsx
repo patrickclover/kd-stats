@@ -33,7 +33,7 @@ const User = ({ kd }: PassedProps) => {
     [kd]
   )
   return (
-    <Flex>
+    <Flex flex="1">
       <Avatar src={kd?.platformInfo.avatarUrl}>
         <AvatarBadge boxSize="1.25em" bg="green.500" />
       </Avatar>
