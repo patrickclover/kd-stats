@@ -52,7 +52,7 @@ const User = ({ kd, sort }: PassedProps) => {
               pl={3}
               pr={3}
               key={key}
-              bg={key === sort ? 'green.500' : undefined}
+              bg={key === sort ? 'black' : undefined}
               borderRadius={5}
             >
               <StatLabel>{stat.displayName}</StatLabel>
