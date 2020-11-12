@@ -32,7 +32,7 @@ const Home: FunctionalComponent = () => {
       <Stack spacing={3}>
         <Stack mb={3} spacing={3}>
           <Flex justify="space-between" align="center">
-            <Heading as="h1" size="3xl" pt={10} fontWeight="300">
+            <Heading as="h1" size="2xl" pt={10} fontWeight="300">
               Scoreboard
             </Heading>
             <Box>
