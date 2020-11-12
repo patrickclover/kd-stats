@@ -35,11 +35,19 @@ const User = ({ kd, sort }: PassedProps) => {
   )
   return (
     <Flex flex="1" direction="column" ml={3} mr={3}>
-      <Box d="flex" pt={3} top={0} position="sticky" bg={bgColor} zIndex="2">
+      <Box
+        d="flex"
+        pb={3}
+        pt={3}
+        top={0}
+        position="sticky"
+        bg={bgColor}
+        zIndex="2"
+      >
         <Avatar src={kd?.platformInfo.avatarUrl}>
           <AvatarBadge boxSize="1.25em" bg="green.500" />
         </Avatar>
-        <Box ml="3" w="100%" pb={5}>
+        <Box ml="3" w="100%">
           <Box>
             <Text fontWeight="bold" fontSize="sm">
               {kd?.platformInfo.platformUserIdentifier}
