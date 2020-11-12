@@ -8,7 +8,6 @@ import {
   StatLabel,
   StatNumber,
   Divider,
-  HStack,
   Stack,
   StatHelpText,
 } from '@chakra-ui/core'
@@ -18,9 +17,10 @@ import { KD } from '../../@types/kd.type'
 
 interface PassedProps {
   kd: KD | null
+  sort: string
 }
 
-const User = ({ kd }: PassedProps) => {
+const User = ({ kd, sort }: PassedProps) => {
   const getUpdate = useMemo(() => {
     if (!kd?.expiryDate) return ''
     return new Date(kd?.expiryDate)
@@ -48,7 +48,13 @@ const User = ({ kd }: PassedProps) => {
           <Divider />
 
           {Object.entries(overview?.stats ?? {}).map(([key, stat]) => (
-            <Stat key={key}>
+            <Stat
+              pl={3}
+              pr={3}
+              key={key}
+              bg={key === sort ? 'green.500' : undefined}
+              borderRadius={5}
+            >
               <StatLabel>{stat.displayName}</StatLabel>
               <StatNumber>{stat.displayValue}</StatNumber>
 

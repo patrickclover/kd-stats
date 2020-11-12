@@ -27,7 +27,7 @@ interface PlatformInfo {
   platformUserIdentifier: string
 }
 
-interface Segment {
+export interface Segment {
   attributes: unknown
   expiryDate: string
   metadata: { name: string }
