@@ -8,8 +8,8 @@ import {
   StatLabel,
   StatNumber,
   Divider,
-  Stack,
   StatHelpText,
+  useColorModeValue,
 } from '@chakra-ui/core'
 import { h } from 'preact'
 import { useMemo } from 'preact/hooks'
@@ -21,6 +21,7 @@ interface PassedProps {
 }
 
 const User = ({ kd, sort }: PassedProps) => {
+  const bgColor = useColorModeValue('white', 'gray.800')
   const getUpdate = useMemo(() => {
     if (!kd?.expiryDate) return ''
     return new Date(kd?.expiryDate)
@@ -34,7 +35,7 @@ const User = ({ kd, sort }: PassedProps) => {
   )
   return (
     <Flex flex="1" direction="column" ml={3} mr={3}>
-      <Box d="flex">
+      <Box d="flex" pt={3} top={0} position="sticky" bg={bgColor} zIndex="2">
         <Avatar src={kd?.platformInfo.avatarUrl}>
           <AvatarBadge boxSize="1.25em" bg="green.500" />
         </Avatar>
