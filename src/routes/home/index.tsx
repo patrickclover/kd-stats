@@ -26,7 +26,7 @@ const Home: FunctionalComponent = () => {
       player?.segments.find(({ type }) => type === 'overview')?.stats ?? null,
     []
   )
-  console.log(sort)
+
   return (
     <div class={style.home}>
       <Stack spacing={3}>

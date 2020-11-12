@@ -10,7 +10,9 @@ const kdHook = (username: string, type = 'xbl') => {
   const getUser = useCallback(async () => {
     try {
       console.log(username)
-      const user = await get<{ data: KD }>(`${baseUrl}/${type}/${username}`)
+      const user = await get<{ data: KD }>(
+        `https://cors-anywhere.herokuapp.com/${baseUrl}/${type}/${username}`
+      )
       setUser(user.data)
     } catch {}
   }, [type, username])
