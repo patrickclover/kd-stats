@@ -29,20 +29,15 @@ const kdHook = (username: string, type = 'xbl'): KD | null => {
     } finally {
       setLoading(false)
     }
-  }, [setUser, type, username])
+  }, [toast, type, username])
 
   useEffect(() => {
-    if (user) return
     getUser()
-  }, [getUser, user])
+  }, [getUser])
 
-  if (!user) return null
-
-  return useMemo(() => ({ ...user, loading, reload: getUser }), [
-    getUser,
-    loading,
-    user,
-  ])
+  if (!user || typeof user !== 'object') return null
+  console.log(user, 'here')
+  return { ...user, loading, reload: getUser }
 }
 
 export default kdHook

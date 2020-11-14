@@ -28,6 +28,7 @@ const Home: FunctionalComponent = () => {
     patrick,
   ])
 
+  console.log(kds, patrick, joe, lewis, jamie)
   const loading = useMemo(
     () => kds.filter(item => !!item?.loading).length > 1,
     [kds]
