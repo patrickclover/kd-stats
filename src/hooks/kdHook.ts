@@ -1,11 +1,11 @@
-import { toast, useToast } from '@chakra-ui/core'
+import { toast, useToast } from '@chakra-ui/react'
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
 import { KD } from '../@types/kd.type'
 import { get } from '../util/fetchHelper'
 import useLocalStorage from './useLocalStorage'
 
 const baseUrl = 'https://api.tracker.gg/api/v2/warzone/standard/profile'
-const kdHook = (username: string, type = 'xbl') => {
+const kdHook = (username: string, type = 'xbl'): KD | null => {
   const [user, setUser] = useLocalStorage<KD | null>(username, null)
   const [loading, setLoading] = useState(false)
   const toast = useToast()
@@ -35,6 +35,8 @@ const kdHook = (username: string, type = 'xbl') => {
     if (user) return
     getUser()
   }, [getUser, user])
+
+  if (!user) return null
 
   return useMemo(() => ({ ...user, loading, reload: getUser }), [
     getUser,

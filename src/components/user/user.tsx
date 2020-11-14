@@ -11,7 +11,7 @@ import {
   StatHelpText,
   useColorModeValue,
   IconButton,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 import { SpinnerIcon } from '@chakra-ui/icons'
 import { Fragment, h } from 'preact'
 import { useMemo } from 'preact/hooks'
@@ -31,14 +31,11 @@ const User = ({ kd, sort }: PassedProps) => {
       .slice(0, 19)
       .replace('T', ' ')
   }, [kd])
-  const overview = useMemo(() => {
-    if (!kd?.segments) return null
-    return kd?.segments.find(
-      ({ metadata }) => metadata.name === 'Battle Royale'
-    )
-  }, [kd])
-
-  if (!overview) return <Fragment></Fragment>
+  const overview = useMemo(
+    () =>
+      kd?.segments.find(({ metadata }) => metadata.name === 'Battle Royale'),
+    [kd]
+  )
 
   return (
     <Flex flex="1" direction="column" ml={3} mr={3}>

@@ -1,6 +1,6 @@
 import { Fragment, FunctionalComponent, h } from 'preact'
 import { Route, Router, RouterOnChangeArgs } from 'preact-router'
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/core'
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 
 import Home from '../routes/home'
 import Profile from '../routes/profile'

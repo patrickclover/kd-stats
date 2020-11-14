@@ -1,4 +1,4 @@
-import { extendTheme, Theme } from '@chakra-ui/core'
+import { extendTheme, Theme } from '@chakra-ui/react'
 
 const config: Theme | Record<string, any> = {
   config: {

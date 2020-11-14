@@ -1,5 +1,4 @@
 import {
-  Box,
   Divider,
   Flex,
   Heading,
@@ -7,7 +6,7 @@ import {
   IconButton,
   Select,
   Stack,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 import { SpinnerIcon } from '@chakra-ui/icons'
 import { FunctionalComponent, h } from 'preact'
 import { useCallback, useMemo, useState } from 'preact/hooks'
@@ -30,19 +29,16 @@ const Home: FunctionalComponent = () => {
   ])
 
   const loading = useMemo(
-    () => kds.filter(({ loading }) => !!loading).length > 1,
+    () => kds.filter(item => !!item?.loading).length > 1,
     [kds]
   )
 
-  const findStats = useCallback((player: KD | null):
-    | Segment['stats']
-    | null => {
-    if (!player?.segments) return null
-    return (
+  const findStats = useCallback(
+    (player: KD | null): Segment['stats'] | null =>
       player?.segments.find(({ metadata }) => metadata.name === 'Battle Royale')
-        ?.stats ?? null
-    )
-  }, [])
+        ?.stats ?? null,
+    []
+  )
 
   return (
     <div class={style.home}>
@@ -60,8 +56,8 @@ const Home: FunctionalComponent = () => {
                 isLoading={loading}
                 icon={<SpinnerIcon />}
                 onClick={() => {
-                  kds.forEach(({ reload }) => {
-                    reload()
+                  kds.forEach(item => {
+                    item?.reload()
                   })
                 }}
               />
