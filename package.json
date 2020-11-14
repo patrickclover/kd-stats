@@ -10,7 +10,6 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "test": "jest ./tests"
   },
-
   "lint-staged": {
     "*.{css,md,scss}": "prettier --write",
     "*.{js,jsx,ts,tsx}": "eslint --fix"
@@ -20,6 +19,7 @@
   ],
   "dependencies": {
     "@chakra-ui/core": "^1.0.0-rc.8",
+    "@chakra-ui/icons": "^1.0.0",
     "framer-motion": "^2.9.4",
     "preact": "^10.3.1",
     "preact-jsx-chai": "^3.0.0",

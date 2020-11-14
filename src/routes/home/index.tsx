@@ -4,11 +4,13 @@ import {
   Flex,
   Heading,
   HStack,
+  IconButton,
   Select,
   Stack,
 } from '@chakra-ui/core'
+import { SpinnerIcon } from '@chakra-ui/icons'
 import { FunctionalComponent, h } from 'preact'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useMemo, useState } from 'preact/hooks'
 import { KD, Segment } from '../../@types/kd.type'
 import User from '../../components/user/user'
 import kdHook from '../../hooks/kdHook'
@@ -20,12 +22,27 @@ const Home: FunctionalComponent = () => {
   const joe = kdHook('josefbenassi%237491959', 'atvi')
   const lewis = kdHook('lewisjblyth1')
   const jamie = kdHook('jamiemalcolm04')
-  const kds = [patrick, joe, lewis, jamie]
-  const findStats = useCallback(
-    (player: KD | null): Segment['stats'] | null =>
-      player?.segments.find(({ type }) => type === 'overview')?.stats ?? null,
-    []
+  const kds = useMemo(() => [patrick, joe, lewis, jamie], [
+    jamie,
+    joe,
+    lewis,
+    patrick,
+  ])
+
+  const loading = useMemo(
+    () => kds.filter(({ loading }) => !!loading).length > 1,
+    [kds]
   )
+
+  const findStats = useCallback((player: KD | null):
+    | Segment['stats']
+    | null => {
+    if (!player?.segments) return null
+    return (
+      player?.segments.find(({ metadata }) => metadata.name === 'Battle Royale')
+        ?.stats ?? null
+    )
+  }, [])
 
   return (
     <div class={style.home}>
@@ -35,7 +52,19 @@ const Home: FunctionalComponent = () => {
             <Heading as="h1" size="xl" pt={10} fontWeight="300">
               Scoreboard
             </Heading>
-            <Box pr={3}>
+
+            <HStack pr={3}>
+              <IconButton
+                variant="outline"
+                aria-label="reload"
+                isLoading={loading}
+                icon={<SpinnerIcon />}
+                onClick={() => {
+                  kds.forEach(({ reload }) => {
+                    reload()
+                  })
+                }}
+              />
               <Select
                 placeholder="Sort by"
                 onChange={({ target }) => setSort(target.value)}
@@ -47,7 +76,7 @@ const Home: FunctionalComponent = () => {
                   </option>
                 ))}
               </Select>
-            </Box>
+            </HStack>
           </Flex>
           <Divider />
         </Stack>

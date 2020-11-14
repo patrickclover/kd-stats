@@ -10,8 +10,10 @@ import {
   Divider,
   StatHelpText,
   useColorModeValue,
+  IconButton,
 } from '@chakra-ui/core'
-import { h } from 'preact'
+import { SpinnerIcon } from '@chakra-ui/icons'
+import { Fragment, h } from 'preact'
 import { useMemo } from 'preact/hooks'
 import { KD } from '../../@types/kd.type'
 
@@ -21,7 +23,7 @@ interface PassedProps {
 }
 
 const User = ({ kd, sort }: PassedProps) => {
-  const bgColor = useColorModeValue('white', 'gray.800')
+  const bgColor = useColorModeValue('white', 'black')
   const getUpdate = useMemo(() => {
     if (!kd?.expiryDate) return ''
     return new Date(kd?.expiryDate)
@@ -29,10 +31,15 @@ const User = ({ kd, sort }: PassedProps) => {
       .slice(0, 19)
       .replace('T', ' ')
   }, [kd])
-  const overview = useMemo(
-    () => kd?.segments.find(({ type }) => type === 'overview'),
-    [kd]
-  )
+  const overview = useMemo(() => {
+    if (!kd?.segments) return null
+    return kd?.segments.find(
+      ({ metadata }) => metadata.name === 'Battle Royale'
+    )
+  }, [kd])
+
+  if (!overview) return <Fragment></Fragment>
+
   return (
     <Flex flex="1" direction="column" ml={3} mr={3}>
       <Box
@@ -49,12 +56,21 @@ const User = ({ kd, sort }: PassedProps) => {
         </Avatar>
         <Box ml="3" w="100%">
           <Box>
-            <Text fontWeight="bold" fontSize="sm">
+            <Text isTruncated fontWeight="bold" fontSize="sm">
               {kd?.platformInfo.platformUserIdentifier}
             </Text>
-            <Text fontSize="sm">Last update: {getUpdate}</Text>
+            <Text isTruncated fontSize="xs">
+              {getUpdate}
+            </Text>
           </Box>
         </Box>
+        <IconButton
+          icon={<SpinnerIcon />}
+          onClick={() => (kd ? kd.reload() : undefined)}
+          aria-label="refresh"
+          isLoading={kd?.loading}
+          variant="ghost"
+        />
       </Box>
 
       {Object.entries(overview?.stats ?? {}).map(([key, stat]) => (
@@ -62,7 +78,8 @@ const User = ({ kd, sort }: PassedProps) => {
           pr={3}
           pt={2}
           key={key}
-          bg={key === sort ? 'green.400' : undefined}
+          pl={3}
+          bg={key === sort ? 'pink.500' : undefined}
           borderRadius={5}
         >
           <StatLabel>{stat.displayName}</StatLabel>

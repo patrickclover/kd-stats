@@ -54,4 +54,6 @@ export interface KD {
   platformInfo: PlatformInfo
   segments: Segment[]
   userInfo: UserInfo
+  loading?: boolean
+  reload?(): void
 }
