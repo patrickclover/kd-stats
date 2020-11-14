@@ -5,7 +5,7 @@ import { get } from '../util/fetchHelper'
 import useLocalStorage from './useLocalStorage'
 
 const baseUrl = 'https://api.tracker.gg/api/v2/warzone/standard/profile'
-const kdHook = (username: string, type = 'xbl'): KD | null => {
+const useKD = (username: string, type = 'xbl'): KD | null => {
   const [user, setUser] = useLocalStorage<KD | null>(username, null)
   const [loading, setLoading] = useState(false)
   const toast = useToast()
@@ -40,4 +40,4 @@ const kdHook = (username: string, type = 'xbl'): KD | null => {
   return { ...user, loading, reload: getUser }
 }
 
-export default kdHook
+export default useKD

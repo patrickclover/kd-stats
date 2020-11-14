@@ -12,15 +12,15 @@ import { FunctionalComponent, h } from 'preact'
 import { useCallback, useMemo, useState } from 'preact/hooks'
 import { KD, Segment } from '../../@types/kd.type'
 import User from '../../components/user/user'
-import kdHook from '../../hooks/kdHook'
+import useKD from '../../hooks/useKD'
 import * as style from './style.css'
 
 const Home: FunctionalComponent = () => {
   const [sort, setSort] = useState<string>('kdRatio')
-  const patrick = kdHook('playbyclover')
-  const joe = kdHook('josefbenassi%237491959', 'atvi')
-  const lewis = kdHook('lewisjblyth1')
-  const jamie = kdHook('jamiemalcolm04')
+  const patrick = useKD('playbyclover')
+  const joe = useKD('josefbenassi%237491959', 'atvi')
+  const lewis = useKD('lewisjblyth1')
+  const jamie = useKD('jamiemalcolm04')
   const kds = useMemo(() => [patrick, joe, lewis, jamie], [
     jamie,
     joe,
