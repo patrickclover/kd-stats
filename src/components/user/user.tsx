@@ -50,6 +50,7 @@ const User = ({ kd, sort }: PassedProps) => {
         position="sticky"
         bg={bgColor}
         zIndex="2"
+        alignItems="center"
       >
         <Avatar src={kd?.platformInfo.avatarUrl}>
           <AvatarBadge boxSize="1.25em" bg="green.500" />
