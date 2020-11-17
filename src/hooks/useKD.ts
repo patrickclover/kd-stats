@@ -1,5 +1,5 @@
-import { toast, useToast } from '@chakra-ui/react'
-import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
+import { useToast } from '@chakra-ui/react'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 import { KD } from '../@types/kd.type'
 import { get } from '../util/fetchHelper'
 import useLocalStorage from './useLocalStorage'
@@ -14,7 +14,7 @@ const useKD = (username: string, type = 'xbl'): KD | null => {
     try {
       setLoading(true)
 
-      const u = await get<{ data: KD }>(
+      const { data } = await get<{ data: KD }>(
         `https://cors-anywhere.herokuapp.com/${baseUrl}/${type}/${username}`
       )
       toast({
@@ -24,7 +24,7 @@ const useKD = (username: string, type = 'xbl'): KD | null => {
         duration: 3000,
         isClosable: true,
       })
-      setUser(u.data)
+      setUser(data)
     } catch {
     } finally {
       setLoading(false)
@@ -36,7 +36,7 @@ const useKD = (username: string, type = 'xbl'): KD | null => {
   }, [getUser])
 
   if (!user || typeof user !== 'object') return null
-  console.log(user, 'here')
+
   return { ...user, loading, reload: getUser }
 }
 
