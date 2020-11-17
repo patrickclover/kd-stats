@@ -1,19 +1,9 @@
-# kd-stats
+# KD Scoreboard - Call of Duty (Warzone)
 
 ## CLI Commands
-*   `npm install`: Installs dependencies
 
-*   `npm run dev`: Run a development, HMR server
+- `yarn`: Installs dependencies
 
-*   `npm run serve`: Run a production-like server
+- `yarn dev`: Run a development, KD server
 
-*   `npm run build`: Production-ready build
-
-*   `npm run lint`: Pass TypeScript files using TSLint
-
-*   `npm run test`: Run Jest and Enzyme with
-    [`enzyme-adapter-preact-pure`](https://github.com/preactjs/enzyme-adapter-preact-pure) for
-    your tests
-
-
-For detailed explanation on how things work, checkout the [CLI Readme](https://github.com/developit/preact-cli/blob/master/README.md).
+- `yarn build`: Compile code for production
